@@ -1,0 +1,51 @@
+server:
+  port: ${appPort:8800}
+
+# Spring MVC actuator endpoints available via /admin/info, /admin/health, ...
+server.servlet-path: /
+management.context-path: /admin
+
+# http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints
+endpoints:
+  enabled: false
+  info:
+    enabled: true
+  health:
+    enabled: true
+  metrics:
+    enabled: true
+
+flyway:
+  enabled: true
+  baseline-on-migrate: true
+  locations: db/migration
+
+info:
+  app:
+    name: @project.artifactId@
+  build:
+    version: @project.version@
+
+spring:
+  jpa:
+    database: POSTGRESQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+multitenancy:
+  user:
+    dataSources:
+      -
+        tenantId: tenant_1
+        url: jdbc:postgresql://localhost:5432/postgres
+        username: apm_alerts
+        password: alert567
+        driverClassName: org.postgresql.Driver
+      -
+        tenantId: tenant_2
+        url: jdbc:postgresql://localhost:5555/postgres
+        username: db2
+        password: db2
+        driverClassName: org.postgresql.Driver

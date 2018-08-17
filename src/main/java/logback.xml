@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <variable name="SIMPLE_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSSZ} [%thread] %-5level %logger - %msg %n"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${SIMPLE_PATTERN}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>TRACE</level>
+        </filter>
+    </appender>
+
+    <root>
+        <level value="INFO"/>
+        <!-- trace is needed for postgresql driver logging -->
+        <!--<level value="TRACE"/>-->
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <logger level="ERROR" name="org.springframework"/>
+    <logger level="INFO" name="com.jaiswalakshay"/>
+    <!-- for JPA sql logging, see persistence.xml -->
+    <!-- the following does not log batch SQL's, need to enable postgresql driver logging, see logging.properties -->
+    <!--<logger level="DEBUG" name="org.springframework.jdbc.core.JdbcTemplate"/>-->
+    <!--<logger level="TRACE" name="org.springframework.jdbc.core.StatementCreatorUtils"/>-->
+</configuration>
