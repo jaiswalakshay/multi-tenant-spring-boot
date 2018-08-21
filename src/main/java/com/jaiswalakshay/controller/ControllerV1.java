@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/v1/user")
@@ -20,6 +21,11 @@ public class ControllerV1 {
     @GetMapping(value = "/{username}")
     public ResponseEntity<User> getUser(@PathVariable("username") String username,@RequestHeader(value = "X-TENANT-ID",required = true) String tenantId) {
         return new ResponseEntity<>(userService.getUser(username), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/getAll")
+    public ResponseEntity<List<User>> getAllUser(@RequestHeader(value = "X-TENANT-ID",required = true) String tenantId) {
+        return new ResponseEntity<>(userService.getAllUser(), HttpStatus.OK);
     }
 
     @PostMapping

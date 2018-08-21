@@ -19,7 +19,7 @@
         <appender-ref ref="CONSOLE"/>
     </root>
 
-    <logger level="ERROR" name="org.springframework"/>
+    <logger level="INFO" name="org.springframework"/>
     <logger level="INFO" name="com.jaiswalakshay"/>
     <!-- for JPA sql logging, see persistence.xml -->
     <!-- the following does not log batch SQL's, need to enable postgresql driver logging, see logging.properties -->
